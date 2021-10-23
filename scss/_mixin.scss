@@ -1,0 +1,19 @@
+@mixin carouselbuttons ($left,$right) {
+    position: absolute;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border: none;
+	top: calc(50% - 35px);
+	cursor: pointer;
+	line-height: 30px;
+	background: none;
+	opacity: 40%;
+    color: $colorDos;
+	left: $left;
+	right: $right;
+}
+
+@mixin hoveropacity {
+	opacity: 100%
+}

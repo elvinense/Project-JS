@@ -1,0 +1,44 @@
+
+.contenedor {
+	max-width: 1200px;
+	width: 90%;
+	margin: auto;
+
+    .contenido-principal {
+        margin-bottom: 50px;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+
+        .contenido-principal__imagen {
+            border-radius: 5px;
+            box-shadow: 1px 10px 15px $colorNegro;
+            width: 40%;
+        }
+        .contenido-principal__contenedor {
+            width: 50%;
+            .contenido-principal__titulo {
+                width: 100%;
+                font-size: 28px;
+                font-family: 'Petrona', serif;
+                font-weight: bold;;
+                text-align: center;
+                word-spacing: 5px;
+                line-height: 50px;
+                padding: 0;
+                
+            .contenido-principal__resumen {
+                width: 100%;
+                font-size: 20px;
+                font-family: 'Petrona', serif;
+                font-weight: bold;;
+                text-align: center;
+                word-spacing: 5px;
+                line-height: 50px;
+                padding: 0
+                }            
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+@import "mixin";
+
+/* --- --- CAROUSEL --- --- */
+
+.imgcarousel {
+    border-radius: 10px;
+    padding-left: 2%;
+}
+
+.carousel__contenedor {
+    position: relative;
+
+    .carousel__anterior {
+        @include carouselbuttons (-30px, none);
+    }
+    
+    .carousel__siguiente {
+        @include carouselbuttons (none, -30px);
+    }
+    
+    .carousel__anterior:hover,
+    .carousel__siguiente:hover {
+        @include hoveropacity
+    }
+}
+
+.carousel__lista {
+    overflow: hidden;
+    .carousel__elemento {
+        text-align: center;
+    }
+}
+
+.carousel__indicadores .glider-dot {
+    display: block;
+    width: 30px;
+    height: 4px;
+    color: $colorDos;
+    opacity: .2;
+    border-radius: 0;
+}
+
+.carousel__indicadores .glider-dot:hover {
+    opacity: .5;
+    background: $colorDos;
+}
+
+.glider-dot.active {
+    background: $colorDos;
+}
+
+.glider-dot {
+    background: $colorDos;
+    opacity: .5
+}
+
+.carousel__indicadores .glider-dot.active {
+    opacity: 1;
+}
