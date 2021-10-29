@@ -202,7 +202,12 @@ h3, p {
 
 .btn-primary {
   background-color: #f9c1b1;
-  background-image: linear-gradient(315deg, #fb8085 20%, #f9c1b1 60%); }
+  background-image: linear-gradient(315deg, #fb8085 20%, #f9c1b1 60%);
+  border-color: white;
+  border-width: 2px; }
+
+.btn-primary:hover {
+  border-color: #000; }
 
 .gallery-container {
   display: grid;
