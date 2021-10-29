@@ -41,3 +41,30 @@
     }
 }
 }
+
+.navbar{
+    display: none;
+}
+
+.nav-index-collapse{
+    @include navcollapse
+}
+
+.nav-index__ul-collapse,
+.nav-index__li-collapse{
+    @include navcollapse_ul_li
+}
+
+.nav-index__link-colapse{
+    @include navcollapse_link
+}
+
+/*.navbar-toggler{
+    
+}*/
+
+.container-fluid{
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}

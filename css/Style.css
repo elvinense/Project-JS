@@ -128,6 +128,44 @@ main, footer {
         cursor: pointer;
         color: #000; }
 
+.navbar {
+  display: none; }
+
+.nav-index-collapse {
+  width: 100%;
+  height: auto;
+  font-family: 'Gabriela', serif;
+  display: flex;
+  justify-content: center; }
+
+.nav-index__ul-collapse,
+.nav-index__li-collapse {
+  padding: 10px;
+  margin: 0;
+  list-style: none;
+  float: left;
+  text-align: center;
+  margin-left: 20px; }
+
+.nav-index__link-colapse {
+  color: #fff;
+  margin: -10px;
+  padding: 10px;
+  display: run-in;
+  text-decoration: none;
+  display: flex; }
+  .nav-index__link-colapse:hover {
+    cursor: pointer;
+    color: #000; }
+
+/*.navbar-toggler{
+    
+}*/
+.container-fluid {
+  display: flex;
+  align-content: center;
+  flex-direction: column; }
+
 h2 {
   width: 20%;
   height: 20%;
@@ -351,7 +389,11 @@ fieldset {
     display: flex;
     justify-content: center; }
   main {
-    width: 95%; } }
+    width: 95%; }
+  .navbar {
+    display: flex; }
+  .nav-index {
+    display: none; } }
 
 /* Responsive 768 */
 @media screen and (min-width: 481px) and (max-width: 768px) {

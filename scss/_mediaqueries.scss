@@ -21,6 +21,12 @@
     main{
         width: 95%;
     }
+    .navbar{
+        display: flex;    
+    }
+    .nav-index{
+        display: none;
+    }
 }
 
 /* Responsive 768 */
