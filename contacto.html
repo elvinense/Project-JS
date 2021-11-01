@@ -4,15 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@1,300&display=swap');
     </style>
-    <title>📧Contacto📭</title>
-    
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!--AWESOME FONTS-->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <!--Aniamte.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <!--Mi Style-->
     <link rel="stylesheet" href="css/Style.css">
+    <link rel="icon" href="img/Pagina/favicon-32x32.png" type="image/ico">
+
 </head>
 
 <body>
@@ -30,20 +43,58 @@
                     <a class="nav-index__link" href="index.html">Nosotras</a>
                 </li>
                 <li class="nav-index__li">
-                    <a class="nav-index__link"  href="Tortas y Tartas.html">Tortas y Tartas</a>
+                    <a class="nav-index__link" href="Tortas y Tartas.html">Tortas y Tartas</a>
                 </li>
                 <li class="nav-index__li">
                     <a class="nav-index__link" href="Mesas Dulces.html">Mesas Dulces</a>
                 </li>
                 <li class="nav-index__li">
-                    <a class="nav-index__link"  href="arma tu pedido.html">Arma tu pedido</a>
+                    <a class="nav-index__link" href="arma tu pedido.html">Arma tu pedido</a>
                 </li>
                 <li class="nav-index__li">
-                    <a class="nav-index__link"  href="contacto.html">Contacto</a>
+                    <a class="nav-index__link" href="contacto.html">Contacto</a>
                 </li>
             </ul>
         </nav>
         <!--Fin MENU-->
+
+        <!--Inicio Menu Collapse-->
+
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div>
+                <nav class="nav-index-collapse">
+                    <ul class="nav-index__ul-collapse">
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="index.html">Nosotras</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="Tortas y Tartas.html">Tortas y Tartas</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="Mesas Dulces.html">Mesas Dulces</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="arma tu pedido.html">Arma tu pedido</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!--Fin Menu Collapse-->
+
     </header>
 
     <main>
@@ -53,57 +104,58 @@
 
         <form>
             <fieldset>
-                <legend>🎁Completa con tus datos y Participa de un sorteo🎊</legend>
-                <section class="formPersonales">
-                    <div>
-                        <label for="Nombre">Nombre</label>
-                        <input type="text" name="Nombre" placeholder="Juan Carlos">
-                        <label for="Apellido">Apellido</label>
-                        <input type="text" name="Apellido" placeholder="Ghost">
-                        <label for="E-mail">E-mail</label>
-                        <input type="email" required placeholder="juancarlosghost@gmail.com">
+                <div class="container">
+                    <div class="row">
+                        <div></div>
+                        <img id="postcard"
+                            src="img/Contacto/Contacto.jpg"
+                            alt="postcard" class="img-responsive move">
+                        <div id="content">
+                            <h1> 🎁Completa con tus datos y Participa de un sorteo🎊 </h1>
+
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="username" class="iconic user"> Nombre <span
+                                            class="required">*</span></label>
+                                    <input type="text" class="form-control" name="username" id="username"
+                                        required="required" placeholder="Escribe aqui como usualmente te llaman">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usermail" class="iconic mail-alt"> E-mail <span
+                                            class="required">*</span></label>
+                                    <input type="email" class="form-control" name="usermail" id="usermail"
+                                        placeholder="Lo prometemos no te enviaremos spam" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject" class="iconic quote-alt"> Interes </label>
+                                    <input type="text" class="form-control" name="subject" id="subject"
+                                        required="required" placeholder="Sobre que te gustaria recibir info?">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="iconic comment"> Message </label>
+                                    <textarea name="Mensaje" id="message" class="form-control" rows="3"
+                                        placeholder="Dejanos un mensaje y te contestaremos a la brevedad"
+                                        required="required"></textarea>
+                                </div>
+                                <input href="Agradecimiento.html" type="submit" value=" ★ Contactarme !" />
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="formCat">
-                        <label for="Categoria">Selecciona tu Categoria</label>
-                        <select name="Categoria" id="Categoria">
-                            <option value="particular">Particular</option>
-                            <option value="empresarial">Empresarial</option>
-                        </select>
-                    </div>
-
-                    <div class="FormCelTacc">
-                        <label for="Celiacos"></label>
-                        <input type="radio" name="Celiacos" value="comun">Comun
-                        <input type="radio" name="Celiacos" value="sin TACC">Sin TACC
-
-                    </div>
-
-                    <div Class="FormGustos">
-                        <label for="Gustos">Selecciona tus gustos</label>
-                        <input type="checkbox" name="Gustos" value="tortas">Tortas
-                        <input type="checkbox" name="Gustos" value="brownies">Brownies
-                        <input type="checkbox" name="Gustos" value="tartas">Tartas
-                        <input type="checkbox" name="Gustos" value="macaróns">Macarons
-                        <input type="checkbox" name="Gustos" value="mesas Dulces">Mesas Dulces
-                        <input type="checkbox" name="Gustos" value="alfajores">Alfajores
-                    </div>
-
-                    <div class="FormBotones">
-                        <input type="submit" value="Participar">
-                        <input type="reset" value="Borrar Datos">
-                    </div>
-                </section>
-            </fieldset>
+                </div>
         </form>
     </main>
     <footer>
         <h3 class="socialtitle">Nuestras Redes</h3>
         <div class="socialmedia">
-            <a class="btn btn-primary" href="https://www.instagram.com/azaharespasteleriacba/"
-                role="button">Instagram</a>
-            <a class="btn btn-primary" href="https://www.facebook.com/azaharespasteleriacba/" role="button">Facebook</a>
-            <a class="btn btn-primary" href="https://wa.me/+543516164292" role="button">Whatsapp</a>
+
+            <a class="btn btn-primary" href="https://www.instagram.com/azaharespasteleriacba/" role="button"
+                target=_blank><i class="fab fa-instagram"></i></a>
+
+            <a class="btn btn-primary" href="https://www.facebook.com/azaharespasteleriacba/" role="button"
+                target=_blank><i class="fab fa-facebook"></i></a>
+            <a class="btn btn-primary" href="https://wa.me/+543516164292" role="button" target=_blank><i
+                    class="fab fa-whatsapp"></i></a>
         </div>
         <div class="copyright">
             <p>
@@ -111,6 +163,11 @@
             </p>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+
 </body>
 
 </html>
