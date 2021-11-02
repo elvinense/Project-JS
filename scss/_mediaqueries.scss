@@ -27,18 +27,36 @@
     .nav-index{
         display: none;
     }
+    .pedido_box{
+        display: flex;
+        justify-content: center;
+        .pedido_img{
+            width: 80%;
+        }
+    }
 }
 
 /* Responsive 768 */
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .logo{
-        width: 40%;
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
     }
     main{
         width: 95%;
+    }
+    header{
+        align-items: center;
+    }
+    .pedido_box{
+        display: flex;
+        justify-content: center;
+        .pedido_img{
+            width: 80%;
+        }
     }
 }
 

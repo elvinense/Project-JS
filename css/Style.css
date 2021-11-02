@@ -479,7 +479,7 @@ input[type=submit]:active, input[type=submit]:focus {
   margin: 50px auto;
   position: absolute;
   transform: scale(1.2) rotate(30deg);
-  left: relative;
+  left: 650px;
   border-radius: 50px; }
 
 .move {
@@ -570,6 +570,26 @@ input[type=submit]:active, input[type=submit]:focus {
     top: 230px;
     z-index: 1; } }
 
+@keyframes animPcWide {
+  from {
+    left: 800px;
+    transform: scale(1.2) rotate(30deg);
+    z-index: 102; }
+  50% {
+    left: 1000px;
+    top: 190px;
+    transform: scale(0.8) rotate(45deg);
+    z-index: 102; }
+  75% {
+    left: 800px;
+    top: 190px;
+    transform: scale(0.8) rotate(45deg);
+    z-index: 1; }
+  to {
+    left: 700px;
+    transform: scale(0.5) rotate(20deg);
+    z-index: 1; } }
+
 @media (min-width: 981px) and (max-width: 1280px) {
   #postcard {
     top: 250px;
@@ -597,6 +617,13 @@ input[type=submit]:active, input[type=submit]:focus {
   #content {
     left: 3%; } }
 
+@media (min-width: 1500px) and (max-width: 1800px) {
+  #postcard {
+    top: 250px;
+    left: 800px; }
+  .move {
+    animation-name: animPcWide; } }
+
 /* Responsive 480 */
 @media screen and (max-width: 480px) {
   body {
@@ -614,16 +641,29 @@ input[type=submit]:active, input[type=submit]:focus {
   .navbar {
     display: flex; }
   .nav-index {
-    display: none; } }
+    display: none; }
+  .pedido_box {
+    display: flex;
+    justify-content: center; }
+    .pedido_box .pedido_img {
+      width: 80%; } }
 
 /* Responsive 768 */
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .logo {
-    width: 40%;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center; }
   main {
-    width: 95%; } }
+    width: 95%; }
+  header {
+    align-items: center; }
+  .pedido_box {
+    display: flex;
+    justify-content: center; }
+    .pedido_box .pedido_img {
+      width: 80%; } }
 
 /* Responsive 1024 */
 @media screen and (min-width: 769px) {
