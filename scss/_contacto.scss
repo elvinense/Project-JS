@@ -6,6 +6,9 @@
     margin-top: -10%;
 }
 
+textarea.form-control{
+    margin-bottom: 10%;
+}
 
 h1 {
     font-family: 'Questrial', Verdana, sans-serif;
@@ -141,7 +144,7 @@ input[type=submit]:active, input[type=submit]:focus {
     margin: 50px auto;
     position: absolute;
     transform: scale(1.2) rotate(30deg);
-    left: 650px;
+    left: relative;
     border-radius: 50px;
 }
 
@@ -161,7 +164,7 @@ input[type=submit]:active, input[type=submit]:focus {
     from {left: 650px; transform: scale(1.2) rotate(30deg); z-index:102;  }
     50%  {left: 1150px; top: 190px; transform: scale(0.8) rotate(45deg); z-index:102; }
     75% {left: 700px; top: 190px; transform: scale(0.8) rotate(45deg); z-index:1;}
-    to {left: 650px; transform: scale(1)  rotate(20deg); z-index:1;}
+    to {left: 650px; transform: scale(0.5)  rotate(20deg); z-index:1;}
 }
 
 @keyframes animTabletHor
@@ -169,7 +172,7 @@ input[type=submit]:active, input[type=submit]:focus {
     from {left: 450px; transform: scale(1.2) rotate(30deg); z-index:102;  }
     50%  {left: 950px; top: 190px; transform: scale(0.8) rotate(45deg); z-index:102; }
     75% {left: 700px; top: 190px; transform: scale(0.8) rotate(45deg); z-index:1;}
-    to {left: 450px; transform: scale(1)  rotate(20deg); z-index:1;}
+    to {left: 450px; transform: scale(0.5)  rotate(20deg); z-index:1;}
 }
 
 @keyframes animTablet
