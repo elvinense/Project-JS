@@ -17,7 +17,7 @@
             width: 40%;
         }
         .contenido-principal__contenedor {
-            width: 50%;
+            width: 100%;
             .contenido-principal__titulo {
                 width: 100%;
                 font-size: 28px;
@@ -27,17 +27,6 @@
                 word-spacing: 5px;
                 line-height: 50px;
                 padding: 0;
-                
-            .contenido-principal__resumen {
-                width: 100%;
-                font-size: 20px;
-                font-family: 'Petrona', serif;
-                font-weight: bold;;
-                text-align: center;
-                word-spacing: 5px;
-                line-height: 50px;
-                padding: 0
-                }            
             }
         }
     }

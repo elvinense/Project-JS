@@ -197,7 +197,7 @@ input[type=submit]:active, input[type=submit]:focus {
     from {left: 800px; transform: scale(1.2) rotate(30deg); z-index:102;  }
     50%  {left: 1000px; top: 190px; transform: scale(0.8) rotate(45deg); z-index:102; }
     75% {left: 800px; top: 190px; transform: scale(0.8) rotate(45deg); z-index:1;}
-    to {left: 700px; transform: scale(0.5)  rotate(20deg); z-index:1;}
+    to {left: 700px; transform: scale(0.1)  rotate(20deg); z-index:1;}
 }
 
 @media (min-width: 981px) and (max-width : 1280px) {
@@ -239,7 +239,7 @@ input[type=submit]:active, input[type=submit]:focus {
     }
 }
 
-@media (min-width: 1500px) and (max-width : 1800px) {
+@media (min-width: 1500px) and (max-width : 2000px) {
     #postcard{
         top: 250px;
         left: 800px;
