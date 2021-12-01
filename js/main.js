@@ -1,26 +1,56 @@
-let tortas = "tortas";
-let precioT = 400;
-let stockT = 5;
+let carro = "";
+let total = 0;
 
-let mesaDulce = "mesa dulce"
-let precioM = 600;
-let stockM = 8;
+let compra  = parseInt(prompt(`Ingrese el Nº de item que desea comprar\n
+                            1- Tortas 
+                            2- Tartas 
+                            3- Cupcakes
+                            4- Finalizar compra y pagar
+                            5- Salir`))
 
-let compra = prompt("Ingrese el producto deseado: tortas o mesa dulce")
-let cantidad = prompt("cuantos quiere solicitar?")
 
-if(compra == tortas){
-    stockT -= cantidad;
-    let precioTotalTorta = precioT * cantidad
-    alert('Debe abonar:' + " " + precioTotalTorta + "$" )
+while (compra != 4 && compra != 5) {
+    
+    let cantidad = 1
+
+    switch (compra) {
+        case 1:
+            cantidad = parseInt(prompt("¿Cuantas Tortas Quiere Comprar?"))
+            carro += cantidad + " Tortas "
+            total += cantidad * 800
+            break;
+            
+        case 2:
+            cantidad = parseInt(prompt("¿Cuantas Tartas Quiere Comprar?"))
+            carro += cantidad + " Tartas "
+            total += cantidad * 600
+            break;
+
+        case 3:
+            cantidad = parseInt(prompt("¿Cuantas Cupcakes Quiere Comprar?"))
+            carro += cantidad + " Cupcakes "
+            total += cantidad * 100
+            break;
+
+    }
+
+    compra = parseInt(prompt(`Ingrese el Nº de item que desea comprar\n
+                            1- Tortas 
+                            2- Tartas 
+                            3- Cupcakes
+                            4- Finalizar compra y pagar
+                            5- Salir`))
+
 }
 
-else if(compra == mesaDulce){
-    stockM -= cantidad;
-    let precioTotalMesa = precioM * cantidad
-    alert('Debe abonar:' + " " + precioTotalMesa + "$")
-}
+if(compra == 4) {
 
-else{
-alert("lo sentimos no tenemos ese producto");
-}
+    if(total == 0) {
+        alert("Tu carro esta vacio")
+    } else {
+        alert(carro + "\n Total a pagar: $"+ total)
+        alert("¡Gracias por su Compra!")
+    }
+} else {
+    alert("¡Gracias por su visita!")
+} 
