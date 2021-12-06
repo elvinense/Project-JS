@@ -1,5 +1,4 @@
 let carro = "";
-let total = 0;
 
 let compra  = parseInt(prompt(`Ingrese el Nº de item que desea comprar\n
                             1- Tortas 
