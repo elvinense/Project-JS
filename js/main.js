@@ -37,36 +37,57 @@ function compras(compra) {
 
     cantidad = parseInt(prompt("¿Cuantas unidades quiere Comprar?"));
 
-    if (compra == 1) {
-        cambioStock(cantidad, stock1, producto1, precio1)
-    }
-
-    if (compra == 2) {
-        cambioStock(cantidad, stock2, producto2, precio2)
-    }
-
-    if (compra == 3) {
-        cambioStock(cantidad, stock3, producto3, precio3)
-    }
-}
-
-// Cambio Stock
-
-function cambioStock(cantidad, stock, producto, precio) {
-    if (cantidad <= stock) {
-        stock -= cantidad
-
-        alert("Se Agregaron " + cantidad + " " + producto + " a tu carro, quedan " + stock + " disponibles")
-        calculoPrecio(cantidad, precio)
-    } 
+    switch (compra) {
+        case 1:
+            if (cantidad <= stock1) {
+                stock1 -= cantidad
     
-    else {
-        alert('No tenemos esa cantidad, solo nos quedan ' + stock + " unidades disponibles");
+                alert("Se Agregaron " + cantidad + " " + producto1 + " a tu carro, quedan " + stock1 + " disponibles")
+                calculoPrecio(cantidad, precio1)
+            }
+    
+            else {
+                alert('No tenemos esa cantidad, solo nos quedan ' + stock1 + " unidades disponibles");
+                compras(compra)
+            }
+    
+            break;
+
+        case 2:
+
+            if (cantidad <= stock2) {
+                stock2 -= cantidad
+    
+                alert("Se Agregaron " + cantidad + " " + producto2 + " a tu carro, quedan " + stock2 + " disponibles")
+                calculoPrecio(cantidad, precio2)
+            }
+    
+            else {
+                alert('No tenemos esa cantidad, solo nos quedan ' + stock2 + " unidades disponibles");
+                compras(compra)
+            }
+
+            break;
+    
+        case 3:
+            if (cantidad <= stock3) {
+                stock3 -= cantidad
+    
+                alert("Se Agregaron " + cantidad + " " + producto3 + " a tu carro, quedan " + stock3 + " disponibles")
+                calculoPrecio(cantidad, precio3)
+            }
+    
+            else {
+                alert('No tenemos esa cantidad, solo nos quedan ' + stock3 + " unidades disponibles");
+                compras(compra)
+            }
+    
+            break;
+        
     }
-
-    return menu()
-
 }
+
+
 
 // Calculo Precio
 
@@ -106,6 +127,7 @@ function pago(precioFinal) {
         let vuelto = pagar - precioFinal
         alert("\n Este es su vuelto: $" + vuelto)
         alert("¡Gracias por su Compra!")
+        menu();
     }
 }
 
