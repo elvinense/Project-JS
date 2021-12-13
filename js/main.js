@@ -1,12 +1,19 @@
 // Variables globales
 
-let producto1 = "Tortas";
-let precio1 = 800;
-let stock1 = 10
+const producto1 = { 
 
-let producto2 = "Tartas";
-let precio2 = 400;
-let stock2 = 20;
+    nombre : "Tortas",
+    precio : 800,
+    stock : 10
+}
+
+const producto2 = {
+
+    nombre : "Tartas",
+    precio : 400,
+    stock : 20
+
+}
 
 let producto3 = "Cupcakes";
 let precio3 = 100;
@@ -14,6 +21,38 @@ let stock3 = 60;
 
 let precioFinal = 0
 
+let semana = 1 // la semana cambiaria y asi la promo segun semana
+
+// Clases Y Funcion PromoSemanal
+
+class Promocion {
+    constructor(nombre, precio, stock){
+        this.nombre = nombre;
+        this.precio = precio;
+    
+    }
+    promoSemanal() {
+    if (semana == 1){ semana += 1;
+        let cantidad = prompt ('Esta semana tenemos ' + this.nombre + ' ' + this.precio + ' $ cada uno, Cuantos quiere comprar?' )
+        calculoPrecio(cantidad,this.precio);
+
+    } else if (semana == 2) { semana += 1;
+        let cantidad = prompt ('Esta semana tenemos ' + this.nombre + ' ' + this.precio + ' $ cada uno, Cuantos quiere comprar?' )
+        calculoPrecio(cantidad,this.precio);
+
+    } else if
+        (semana == 3){ semana -= 2
+            alert('Lo Sentimos esta semana no tenemos promociones')
+            menu()
+            }
+        }
+    }    
+
+
+// Creador de objetos mediante clases
+
+const promo1 = new Promocion('1 Docena de Pops', 600);
+const promo2 = new Promocion('2 Docenas de bombones', 800)
 
 // Funcion menu
 
@@ -23,48 +62,52 @@ function menu() {
                             1- Tortas 
                             2- Tartas 
                             3- Cupcakes
-                            4- Salir`));
+                            4- !Promocion de la Semana! (a pedido)
+                            5- Salir`));
 
-    if (compra == 1 || compra == 2 || compra == 3) compras(compra)
-    else if (compra == 4) return
+    if (compra == 1 || compra == 2 || compra == 3) carrito(compra)
+    else if (semana == 1 && compra == 4) promo1.promoSemanal()
+    else if (semana == 2 && compra == 4) promo2.promoSemanal()
+    else if (semana == 3 && compra == 4) promo2.promoSemanal()
+    else if (compra == 5) return
     else menu()
 
 }
 
 // Ejecucion de compra
 
-function compras(compra) {
+function carrito(compra) {
 
     cantidad = parseInt(prompt("¿Cuantas unidades quiere Comprar?"));
 
     switch (compra) {
         case 1:
-            if (cantidad <= stock1) {
-                stock1 -= cantidad
+            if (cantidad <= producto1.stock) {
+                producto1.stock -= cantidad
     
-                alert("Se Agregaron " + cantidad + " " + producto1 + " a tu carro, quedan " + stock1 + " disponibles")
-                calculoPrecio(cantidad, precio1)
+                alert("Se Agregaron " + cantidad + " " + producto1.nombre + " a tu carro, quedan " + producto1.stock + " disponibles")
+                calculoPrecio(cantidad, producto1.precio)
             }
     
             else {
-                alert('No tenemos esa cantidad, solo nos quedan ' + stock1 + " unidades disponibles");
-                compras(compra)
+                alert('No tenemos esa cantidad, solo nos quedan ' + producto1.stock + " unidades disponibles");
+                carrito(compra)
             }
     
             break;
 
         case 2:
 
-            if (cantidad <= stock2) {
-                stock2 -= cantidad
+            if (cantidad <= producto2.stock) {
+                producto2.stock -= cantidad
     
-                alert("Se Agregaron " + cantidad + " " + producto2 + " a tu carro, quedan " + stock2 + " disponibles")
-                calculoPrecio(cantidad, precio2)
+                alert("Se Agregaron " + cantidad + " " + producto2.nombre + " a tu carro, quedan " + producto2.stock + " disponibles")
+                calculoPrecio(cantidad, producto2.precio)
             }
     
             else {
-                alert('No tenemos esa cantidad, solo nos quedan ' + stock2 + " unidades disponibles");
-                compras(compra)
+                alert('No tenemos esa cantidad, solo nos quedan ' + producto2.stock + " unidades disponibles");
+                carrito(compra)
             }
 
             break;
@@ -79,14 +122,13 @@ function compras(compra) {
     
             else {
                 alert('No tenemos esa cantidad, solo nos quedan ' + stock3 + " unidades disponibles");
-                compras(compra)
+                carrito(compra)
             }
     
             break;
-        
+
     }
 }
-
 
 
 // Calculo Precio
@@ -129,6 +171,6 @@ function pago(precioFinal) {
         alert("¡Gracias por su Compra!")
         menu();
     }
-}
+} 
 
-menu();
+menu()
