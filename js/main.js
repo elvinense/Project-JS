@@ -1,75 +1,126 @@
-// Variables globales
+// Array Productos
 
-const producto1 = { 
+let listaProductos = [{
+    id: 1,
+    nombre: " Tortas ",
+    precio: 800,
 
-    nombre : "Tortas",
-    precio : 800,
-    stock : 10
+}, {
+    id: 2,
+    nombre: " Tartas ",
+    precio: 400,
+
+}, {
+    id: 3,
+    nombre: " Cupcakes ",
+    precio: 100,
+
+}]
+
+// Array Carrito de compras
+
+let listaCompras = []
+
+////// Funciones Globales /////
+
+// Agregar a listaCompras
+
+function agregarProductos(cantidad, nombre, totalProducto, id) {
+
+    nuevoProducto = new producto(cantidad, nombre, totalProducto, id)
+
+    listaCompras.push(nuevoProducto)
+
+    menu()
 }
 
-const producto2 = {
 
-    nombre : "Tartas",
-    precio : 400,
-    stock : 20
+// Constructor de objetos Mediante clase
 
-}
+class producto {
+    constructor(cantidad, nombre, totalProducto, id) {
 
-let producto3 = "Cupcakes";
-let precio3 = 100;
-let stock3 = 60;
-
-let precioFinal = 0
-
-let semana = 1 // la semana cambiaria y asi la promo segun semana
-
-// Clases Y Funcion PromoSemanal
-
-class Promocion {
-    constructor(nombre, precio, stock){
+        this.cantidad = cantidad;
         this.nombre = nombre;
-        this.precio = precio;
-    
+        this.totalProducto = totalProducto;
+        this.id = id;
     }
-    promoSemanal() {
-    if (semana == 1){ semana += 1;
-        let cantidad = prompt ('Esta semana tenemos ' + this.nombre + ' ' + this.precio + ' $ cada uno, Cuantos quiere comprar?' )
-        calculoPrecio(cantidad,this.precio);
+}
 
-    } else if (semana == 2) { semana += 1;
-        let cantidad = prompt ('Esta semana tenemos ' + this.nombre + ' ' + this.precio + ' $ cada uno, Cuantos quiere comprar?' )
-        calculoPrecio(cantidad,this.precio);
+// Calculo Precio
 
-    } else if
-        (semana == 3){ semana -= 2
-            alert('Lo Sentimos esta semana no tenemos promociones')
-            menu()
-            }
+const calculoPrecio = (cantidad, precio) => (precio * cantidad)
+
+
+//Mostrar Carrito
+
+function mostrarCarrito() {
+    if (listaCompras == "") {
+        alert("Su Carrito esta Vacio")
+
+        menu()
+
+    } else {
+
+        let mostrarCompra = "Su carrito contiene:\n"
+
+        for (const producto of listaCompras) {
+            mostrarCompra += producto.cantidad + producto.nombre + "$" + producto.totalProducto + " ID: " + producto.id + "\n"
         }
-    }    
+        alert(mostrarCompra);
+    }
+}
 
+// Eliminar Producto
 
-// Creador de objetos mediante clases
+const eliminarProductos = () => {
 
-const promo1 = new Promocion('1 Docena de Pops', 600);
-const promo2 = new Promocion('2 Docenas de bombones', 800)
+    if (listaCompras == "") {
+        alert("Su Carrito esta Vacio")
 
-// Funcion menu
+        menu()
+
+    } else {
+
+        alert("Debera Eliminar el producto por su ID")
+        mostrarCarrito()
+        let producto = parseInt(prompt("Ingrese el ID del producto a eliminar"))
+        const index = buscarIndice(producto)
+        listaCompras.splice(index, 1)
+        alert("Producto fue eliminado correctamente")
+        // guardarStorage("productos", productos)
+        menu()
+    }
+}
+
+// Buscar por Indice
+
+const buscarIndice = (id) => {
+    const index = listaCompras.findIndex(producto => producto.id == id)
+
+    if (index != -1) {
+        return index
+    } else {
+        alert("ID Incorrecto")
+    }
+}
+
+// Funcion Principal menu
 
 function menu() {
 
-    let compra = parseInt(prompt(`Ingrese el Nº de item que desea comprar\n
+    let compra = parseInt(prompt(`Ingrese el Nº de item que desea comprar
                             1- Tortas 
                             2- Tartas 
                             3- Cupcakes
-                            4- !Promocion de la Semana! (a pedido)
-                            5- Salir`));
+                            4- Ver Carrito de compras
+                            5- Eliminar productos
+                            6- Salir`));
 
     if (compra == 1 || compra == 2 || compra == 3) carrito(compra)
-    else if (semana == 1 && compra == 4) promo1.promoSemanal()
-    else if (semana == 2 && compra == 4) promo2.promoSemanal()
-    else if (semana == 3 && compra == 4) promo2.promoSemanal()
-    else if (compra == 5) return
+    else if (compra == 4) mostrarCarrito(), menu()
+    else if (compra == 5) eliminarProductos()
+    else if (compra == 6) return
     else menu()
 
 }
@@ -78,99 +129,85 @@ function menu() {
 
 function carrito(compra) {
 
-    cantidad = parseInt(prompt("¿Cuantas unidades quiere Comprar?"));
+    cantidad = parseInt(prompt("¿Cuantas unidades quiere Comprar?"))
 
     switch (compra) {
+
         case 1:
-            if (cantidad <= producto1.stock) {
-                producto1.stock -= cantidad
-    
-                alert("Se Agregaron " + cantidad + " " + producto1.nombre + " a tu carro, quedan " + producto1.stock + " disponibles")
-                calculoPrecio(cantidad, producto1.precio)
+
+            if (isNaN(cantidad)) {
+                alert("Por favor ingrese un numero")
+
+                menu()
+
+            } else {
+
+                let producto = listaProductos[0]
+
+                totalProducto = calculoPrecio(cantidad, producto.precio)
+
+                alert("Se Agregaron " + cantidad + " " + producto.nombre + " a tu carro por" + " $ " + totalProducto)
+
+                agregarProductos(cantidad, producto.nombre, totalProducto, producto.id)
+
+                menu()
             }
-    
-            else {
-                alert('No tenemos esa cantidad, solo nos quedan ' + producto1.stock + " unidades disponibles");
-                carrito(compra)
-            }
-    
+
             break;
 
         case 2:
 
-            if (cantidad <= producto2.stock) {
-                producto2.stock -= cantidad
-    
-                alert("Se Agregaron " + cantidad + " " + producto2.nombre + " a tu carro, quedan " + producto2.stock + " disponibles")
-                calculoPrecio(cantidad, producto2.precio)
-            }
-    
-            else {
-                alert('No tenemos esa cantidad, solo nos quedan ' + producto2.stock + " unidades disponibles");
-                carrito(compra)
+            if (isNaN(cantidad)) {
+                alert("Por favor ingrese un numero")
+
+                menu()
+
+            } else {
+
+                let producto = listaProductos[1]
+
+                totalProducto = calculoPrecio(cantidad, producto.precio)
+
+                console.log(totalProducto)
+
+                alert("Se Agregaron " + cantidad + " " + producto.nombre + " a tu carro por" + " $ " + totalProducto)
+
+                agregarProductos(cantidad, producto.nombre, totalProducto, producto.id)
+
+                console.log(totalProducto)
+
+                menu()
             }
 
+
             break;
-    
+
         case 3:
-            if (cantidad <= stock3) {
-                stock3 -= cantidad
-    
-                alert("Se Agregaron " + cantidad + " " + producto3 + " a tu carro, quedan " + stock3 + " disponibles")
-                calculoPrecio(cantidad, precio3)
+
+            if (isNaN(cantidad)) {
+                alert("Por favor ingrese un numero")
+
+                menu()
+
+            } else {
+
+                let producto = listaProductos[2]
+
+                totalProducto = calculoPrecio(cantidad, producto.precio)
+
+                console.log(totalProducto)
+
+                alert("Se Agregaron " + cantidad + " " + producto.nombre + " a tu carro por" + " $ " + totalProducto)
+
+                agregarProductos(cantidad, producto.nombre, totalProducto, producto.id)
+
+                console.log(totalProducto)
+
+                menu()
             }
-    
-            else {
-                alert('No tenemos esa cantidad, solo nos quedan ' + stock3 + " unidades disponibles");
-                carrito(compra)
-            }
-    
             break;
 
-    }
+        }
 }
-
-
-// Calculo Precio
-
-function calculoPrecio(cantidad, precio) {
-    let precioFinal = precio * cantidad
-    finalizarCompra(precioFinal)
-
-
-}
-
-// Finalizar Compra
-
-function finalizarCompra(precioFinal) {
-
-    if (precioFinal == 0) {
-        alert("Tu carro esta vacio")
-        return menu()
-    } 
-    
-    else {
-        alert("\n Total a pagar: $" + precioFinal)
-        pago(precioFinal)
-    }
-}
-
-// Ejecucion Pago
-
-function pago(precioFinal) {
-    let pagar = prompt("Con cuanto abonara el total de " + precioFinal);
-    if (pagar < precioFinal) {
-        alert("El monto ingresado no es suficiente")
-        return pago(precioFinal)
-    } 
-    
-    else {
-
-        let vuelto = pagar - precioFinal
-        alert("\n Este es su vuelto: $" + vuelto)
-        alert("¡Gracias por su Compra!")
-        menu();
-    }
-} 
 
 menu()
