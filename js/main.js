@@ -64,9 +64,24 @@ function mostrarCarrito() {
 
         let mostrarCompra = "Su carrito contiene:\n"
 
+        listaCompras.sort((a, b) => {
+            if (a.id < b.id) {
+            return -1;
+            }
+            
+            if (a.id > b.id) {
+            return 1;
+            }
+            
+            return 0;
+            
+            });
+
         for (const producto of listaCompras) {
-            mostrarCompra += producto.cantidad + producto.nombre + "$" + producto.totalProducto + " ID: " + producto.id + "\n"
+            mostrarCompra += producto.cantidad + producto.nombre + "$" + producto.totalProducto + " ID: " + producto.id + "\n";
         }
+
+        console.log(listaCompras)
         alert(mostrarCompra);
     }
 }
