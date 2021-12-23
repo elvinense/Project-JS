@@ -17,9 +17,40 @@ let listaProductos = [{
 
 }]
 
+
+//Guardado Local Lista Procutos
+
+if(localStorage.listaProductos) {
+    listaProductos = JSON.parse(localStorage.getItem("listaProductos"))
+} else {
+    guardarLocal("listaProductos", listaProductos)
+}
+
+// Guardar Local ListaCompras
+
+function guardarLocal(key, value) {
+    localStorage.setItem(key,JSON.stringify(value))
+    console.log("Guardado con exito")
+}
+
+
 // Array Carrito de compras
 
 let listaCompras = []
+
+
+// DOM 
+
+function generarTicket(){
+    for (const producto of listaCompras) {
+        let contenedor = document.createElement("h1");
+        //Definimos el innerHTML del elemento con una plantilla de texto
+        contenedor.innerHTML = `<li> ID: ${producto.id}</li>
+                                <li>  Producto: ${producto.nombre}</li>
+                                <li> $ ${producto.totalProducto}</li>`;
+        document.body.appendChild(contenedor);
+    }
+}
 
 ////// Funciones Globales /////
 
@@ -30,6 +61,8 @@ function agregarProductos(cantidad, nombre, totalProducto, id) {
     nuevoProducto = new producto(cantidad, nombre, totalProducto, id)
 
     listaCompras.push(nuevoProducto)
+
+    guardarLocal("listaCompras", listaCompras)
 
     menu()
 }
@@ -222,7 +255,8 @@ function carrito(compra) {
             }
             break;
 
-        }
+    }
 }
 
 menu()
+generarTicket()
