@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@1,300&display=swap');
+    </style>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!--AWESOME FONTS-->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <!--Aniamte.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!--Mi Style-->
+    <link rel="stylesheet" href="../css/Style.css">
+    <link rel="icon" href="../img/Pagina/favicon.ico" type="image/ico">
+
+    <!--SEO-->
+    <title>Arma tu Pedido</title>
+
+    <meta name="description"
+        content="nuestra lista de precios la facilidad de generar tu pedido online siguiendo las instrucciones, armalo a tu gusto">
+
+    <meta name="keywords"
+        content="pedido, custom,compra, variedades, gustos, fondant, crema, vainilla, bizcochuelo, dulce de leche, mousse">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a class="logo__link" href="index.html">
+                <img src="../img/Pagina/logo solo.png" alt="logo" class="logo__img">
+            </a>
+        </div>
+
+        <!--Inicio MENU-->
+        <nav class="nav-index">
+            <ul class="nav-index__ul">
+                <li class="nav-index__li">
+                    <a class="nav-index__link" href="../index.html">Nosotras</a>
+                </li>
+                <li class="nav-index__li">
+                    <a class="nav-index__link" href="../Tortas y Tartas.html">Tortas y Tartas</a>
+                </li>
+                <li class="nav-index__li">
+                    <a class="nav-index__link" href="../Mesas Dulces.html">Mesas Dulces</a>
+                </li>
+                <li class="nav-index__li">
+                    <a class="nav-index__link" href="arma tu pedido copy.html">Arma tu pedido</a>
+                </li>
+                <li class="nav-index__li">
+                    <a class="nav-index__link" href="../contacto.html">Contacto</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!--Fin MENU-->
+
+        <!--Inicio Menu Collapse-->
+
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div>
+                <nav class="nav-index-collapse">
+                    <ul class="nav-index__ul-collapse">
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="../index.html">Nosotras</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="../Tortas y Tartas.html">Tortas y Tartas</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="../Mesas Dulces.html">Mesas Dulces</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="arma tu pedido copy.html">Arma tu pedido</a>
+                        </li>
+                        <li class="nav-index__li-collapse">
+                            <a class="nav-index__link-colapse" href="../contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!--Fin Menu Collapse-->
+
+    <!-- Inicio Carrito Compras-->
+
+    <div class="container">
+        <h4>Carrito de compras</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Acción</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody id="items"></tbody>
+            <tfoot>
+                <tr id="footer">
+                    <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+                </tr>
+            </tfoot>
+        </table>
+        <h4>Productos</h4>
+        <div class="row" id="cards"></div>
+    </div>
+
+    <template id="template-footer">
+        <th scope="row" colspan="2">Total productos</th>
+        <td>10</td>
+        <td>
+            <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+                vaciar todo
+            </button>
+        </td>
+        <td class="font-weight-bold">$ <span>5000</span></td>
+    </template>
+
+    <template id="template-carrito">
+        <tr>
+            <th scope="row">id</th>
+            <td>torta</td>
+            <td>1</td>
+            <td>
+                <button class="btn btn-info btn-sm">
+                    +
+                </button>
+                <button class="btn btn-danger btn-sm">
+                    -
+                </button>
+            </td>
+            <td>$ <span>500</span></td>
+        </tr>
+    </template>
+
+    <template id="template-card">
+        <div class="col-12 mb-2 col-md-3">
+            <div class="card">
+                <img src="" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h5>Titulo</h5>
+                    <p>precio</p>
+                    <button class="btn btn-dark">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

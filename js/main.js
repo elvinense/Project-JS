@@ -1,262 +1,162 @@
-// Array Productos
+const cards = document.getElementById('cards')
+const items = document.getElementById('items')
+const footer = document.getElementById('footer')
+const templateCard = document.getElementById('template-card').content
+const templateFooter = document.getElementById('template-footer').content
+const templateCarrito = document.getElementById('template-carrito').content
+const fragment = document.createDocumentFragment()
 
-let listaProductos = [{
-    id: 1,
-    nombre: " Tortas ",
-    precio: 800,
+let carrito = {}
 
-}, {
-    id: 2,
-    nombre: " Tartas ",
-    precio: 400,
+// Eventos
+// El evento DOMContentLoaded es disparado cuando el documento HTML ha sido completamente cargado y parseado
 
-}, {
-    id: 3,
-    nombre: " Cupcakes ",
-    precio: 100,
-
-}]
-
-
-//Guardado Local Lista Procutos
-
-if(localStorage.listaProductos) {
-    listaProductos = JSON.parse(localStorage.getItem("listaProductos"))
-} else {
-    guardarLocal("listaProductos", listaProductos)
-}
-
-// Guardar Local ListaCompras
-
-function guardarLocal(key, value) {
-    localStorage.setItem(key,JSON.stringify(value))
-    console.log("Guardado con exito")
-}
-
-
-// Array Carrito de compras
-
-let listaCompras = []
-
-
-// DOM 
-
-function generarTicket(){
-    for (const producto of listaCompras) {
-        let contenedor = document.createElement("h1");
-        //Definimos el innerHTML del elemento con una plantilla de texto
-        contenedor.innerHTML = `<li> ID: ${producto.id}</li>
-                                <li>  Producto: ${producto.nombre}</li>
-                                <li> $ ${producto.totalProducto}</li>`;
-        document.body.appendChild(contenedor);
+document.addEventListener('DOMContentLoaded', e => {
+    fetchData()
+    if (localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        pintarCarrito()
     }
+});
+cards.addEventListener('click', e => {
+    addCarrito(e)
+});
+items.addEventListener('click', e => {
+    btnAumentarDisminuir(e)
+})
+
+// Traer productos
+
+const fetchData = async () => {
+    const res = await fetch('api.json');
+    const data = await res.json()
+    // console.log(data)
+    pintarCards(data)
 }
 
-////// Funciones Globales /////
-
-// Agregar a listaCompras
-
-function agregarProductos(cantidad, nombre, totalProducto, id) {
-
-    nuevoProducto = new producto(cantidad, nombre, totalProducto, id)
-
-    listaCompras.push(nuevoProducto)
-
-    guardarLocal("listaCompras", listaCompras)
-
-    menu()
+// Pintar productos
+const pintarCards = data => {
+    data.forEach(item => {
+        templateCard.querySelector('h5').textContent = item.title
+        templateCard.querySelector('p').textContent = item.precio
+        templateCard.querySelector('button').dataset.id = item.id
+        templateCard.querySelector('img').setAttribute("src", item.thumbnailUrl)
+        const clone = templateCard.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    cards.appendChild(fragment)
 }
 
-
-// Constructor de objetos Mediante clase
-
-class producto {
-    constructor(cantidad, nombre, totalProducto, id) {
-
-        this.cantidad = cantidad;
-        this.nombre = nombre;
-        this.totalProducto = totalProducto;
-        this.id = id;
+// Agregar al carrito
+const addCarrito = e => {
+    if (e.target.classList.contains('btn-dark')) {
+        // console.log(e.target.dataset.id)
+        // console.log(e.target.parentElement)
+        setCarrito(e.target.parentElement)
     }
+    e.stopPropagation()
 }
 
-// Calculo Precio
+const setCarrito = item => {
+    // console.log(item)
+    const producto = {
+        title: item.querySelector('h5').textContent,
+        precio: item.querySelector('p').textContent,
+        id: item.querySelector('button').dataset.id,
+        cantidad: 1
+    }
+    // console.log(producto)
+    if (carrito.hasOwnProperty(producto.id)) {
+        producto.cantidad = carrito[producto.id].cantidad + 1
+    }
 
-const calculoPrecio = (cantidad, precio) => (precio * cantidad)
+    carrito[producto.id] = {
+        ...producto
+    }
 
+    pintarCarrito()
+}
 
-//Mostrar Carrito
+const pintarCarrito = () => {
+    items.innerHTML = ''
 
-function mostrarCarrito() {
-    if (listaCompras == "") {
-        alert("Su Carrito esta Vacio")
+    Object.values(carrito).forEach(producto => {
+        templateCarrito.querySelector('th').textContent = producto.id
+        templateCarrito.querySelectorAll('td')[0].textContent = producto.title
+        templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
+        templateCarrito.querySelector('span').textContent = producto.precio * producto.cantidad
 
-        menu()
+        //botones
+        templateCarrito.querySelector('.btn-info').dataset.id = producto.id
+        templateCarrito.querySelector('.btn-danger').dataset.id = producto.id
 
-    } else {
+        const clone = templateCarrito.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    items.appendChild(fragment)
 
-        let mostrarCompra = "Su carrito contiene:\n"
+    pintarFooter()
 
-        listaCompras.sort((a, b) => {
-            if (a.id < b.id) {
-            return -1;
-            }
-            
-            if (a.id > b.id) {
-            return 1;
-            }
-            
-            return 0;
-            
-            });
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+}
 
-        for (const producto of listaCompras) {
-            mostrarCompra += producto.cantidad + producto.nombre + "$" + producto.totalProducto + " ID: " + producto.id + "\n";
+const pintarFooter = () => {
+    footer.innerHTML = ''
+
+    if (Object.keys(carrito).length === 0) {
+        footer.innerHTML = `
+        <th scope="row" colspan="5">Su carrito esta vacio </th>`
+        return
+    }
+
+    // sumar cantidad y sumar totales
+    const nCantidad = Object.values(carrito).reduce((acc, {
+        cantidad
+    }) => acc + cantidad, 0)
+    const nPrecio = Object.values(carrito).reduce((acc, {
+        cantidad,
+        precio
+    }) => acc + cantidad * precio, 0)
+    // console.log(nPrecio)
+
+    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+    templateFooter.querySelector('span').textContent = nPrecio
+
+    const clone = templateFooter.cloneNode(true)
+    fragment.appendChild(clone)
+
+    footer.appendChild(fragment)
+
+    const boton = document.querySelector('#vaciar-carrito')
+    boton.addEventListener('click', () => {
+        carrito = {}
+        pintarCarrito()
+    })
+
+}
+
+const btnAumentarDisminuir = e => {
+    // console.log(e.target.classList.contains('btn-info'))
+    if (e.target.classList.contains('btn-info')) {
+        const producto = carrito[e.target.dataset.id]
+        producto.cantidad++
+        carrito[e.target.dataset.id] = {
+            ...producto
         }
-
-        console.log(listaCompras)
-        alert(mostrarCompra);
+        pintarCarrito()
     }
-}
 
-// Eliminar Producto
-
-const eliminarProductos = () => {
-
-    if (listaCompras == "") {
-        alert("Su Carrito esta Vacio")
-
-        menu()
-
-    } else {
-
-        alert("Debera Eliminar el producto por su ID")
-        mostrarCarrito()
-        let producto = parseInt(prompt("Ingrese el ID del producto a eliminar"))
-        const index = buscarIndice(producto)
-        listaCompras.splice(index, 1)
-        alert("Producto fue eliminado correctamente")
-        // guardarStorage("productos", productos)
-        menu()
-    }
-}
-
-// Buscar por Indice
-
-const buscarIndice = (id) => {
-    const index = listaCompras.findIndex(producto => producto.id == id)
-
-    if (index != -1) {
-        return index
-    } else {
-        alert("ID Incorrecto")
-    }
-}
-
-// Funcion Principal menu
-
-function menu() {
-
-    let compra = parseInt(prompt(`Ingrese el Nº de item que desea comprar
-                            1- Tortas 
-                            2- Tartas 
-                            3- Cupcakes
-                            4- Ver Carrito de compras
-                            5- Eliminar productos
-                            6- Salir`));
-
-    if (compra == 1 || compra == 2 || compra == 3) carrito(compra)
-    else if (compra == 4) mostrarCarrito(), menu()
-    else if (compra == 5) eliminarProductos()
-    else if (compra == 6) return
-    else menu()
-
-}
-
-// Ejecucion de compra
-
-function carrito(compra) {
-
-    cantidad = parseInt(prompt("¿Cuantas unidades quiere Comprar?"))
-
-    switch (compra) {
-
-        case 1:
-
-            if (isNaN(cantidad)) {
-                alert("Por favor ingrese un numero")
-
-                menu()
-
-            } else {
-
-                let producto = listaProductos[0]
-
-                totalProducto = calculoPrecio(cantidad, producto.precio)
-
-                alert("Se Agregaron " + cantidad + " " + producto.nombre + " a tu carro por" + " $ " + totalProducto)
-
-                agregarProductos(cantidad, producto.nombre, totalProducto, producto.id)
-
-                menu()
+    if (e.target.classList.contains('btn-danger')) {
+        const producto = carrito[e.target.dataset.id]
+        producto.cantidad--
+        if (producto.cantidad === 0) {
+            delete carrito[e.target.dataset.id]
+        } else {
+            carrito[e.target.dataset.id] = {
+                ...producto
             }
-
-            break;
-
-        case 2:
-
-            if (isNaN(cantidad)) {
-                alert("Por favor ingrese un numero")
-
-                menu()
-
-            } else {
-
-                let producto = listaProductos[1]
-
-                totalProducto = calculoPrecio(cantidad, producto.precio)
-
-                console.log(totalProducto)
-
-                alert("Se Agregaron " + cantidad + " " + producto.nombre + " a tu carro por" + " $ " + totalProducto)
-
-                agregarProductos(cantidad, producto.nombre, totalProducto, producto.id)
-
-                console.log(totalProducto)
-
-                menu()
-            }
-
-
-            break;
-
-        case 3:
-
-            if (isNaN(cantidad)) {
-                alert("Por favor ingrese un numero")
-
-                menu()
-
-            } else {
-
-                let producto = listaProductos[2]
-
-                totalProducto = calculoPrecio(cantidad, producto.precio)
-
-                console.log(totalProducto)
-
-                alert("Se Agregaron " + cantidad + " " + producto.nombre + " a tu carro por" + " $ " + totalProducto)
-
-                agregarProductos(cantidad, producto.nombre, totalProducto, producto.id)
-
-                console.log(totalProducto)
-
-                menu()
-            }
-            break;
-
+        }
+        pintarCarrito()
     }
+    e.stopPropagation()
 }
-
-menu()
-generarTicket()

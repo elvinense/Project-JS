@@ -1,0 +1,45 @@
+//#template-card {}
+//.row{} 
+//.card-body{}
+
+.container{
+    align-items: center;
+    justify-items: end;
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}
+
+#cards{
+    margin-top: 1%;
+
+}
+
+#footer{
+    z-index: 0;
+
+}
+
+.col-12.mb-2.col-md-3{
+    z-index: 0;
+}
+
+.card{
+    background-color: transparent;
+    
+}
+
+.btn.btn-info.btn-sm{
+    background-color: #f9c1b1;
+}
+
+.btn.btn-danger.btn-sm{
+    background-color: #fb8085;
+}
+
+h5{
+    text-align: center;
+}
