@@ -754,6 +754,9 @@ tbody, td, tfoot, th, thead, tr {
 .btn.btn-info.btn-sm {
   background-color: #f9c1b1; }
 
+.card-body {
+  display: inline-grid; }
+
 .btn.btn-danger.btn-sm {
   background-color: #fb8085; }
 

@@ -5,15 +5,23 @@ const templateCard = document.getElementById('template-card').content
 const templateFooter = document.getElementById('template-footer').content
 const templateCarrito = document.getElementById('template-carrito').content
 const fragment = document.createDocumentFragment()
+const divisa = "$"
 
 let carrito = {}
 
 // Eventos
 // El evento DOMContentLoaded es disparado cuando el documento HTML ha sido completamente cargado y parseado
 
-document.addEventListener('DOMContentLoaded', e => {
+// $(document).ready(function(){
+
+//     console.log('funcionando')
+// });
+
+//Jquery Example //
+
+$(document).ready(function () {
     fetchData()
-    if (localStorage.getItem('carrito')) {
+    if ($('carrito')) {
         carrito = JSON.parse(localStorage.getItem('carrito'))
         pintarCarrito()
     }
@@ -24,6 +32,8 @@ cards.addEventListener('click', e => {
 items.addEventListener('click', e => {
     btnAumentarDisminuir(e)
 })
+
+
 
 // Traer productos
 
@@ -38,22 +48,43 @@ const fetchData = async () => {
 const pintarCards = data => {
     data.forEach(item => {
         templateCard.querySelector('h5').textContent = item.title
-        templateCard.querySelector('p').textContent = item.precio
+        templateCard.querySelector('p').textContent = item.precio;
         templateCard.querySelector('button').dataset.id = item.id
         templateCard.querySelector('img').setAttribute("src", item.thumbnailUrl)
+        templateCard.querySelector('img').id = "compra-" + item.id
         const clone = templateCard.cloneNode(true)
         fragment.appendChild(clone)
     })
     cards.appendChild(fragment)
 }
 
-// Agregar al carrito
+
+
+// Agregar al carrito + animacion jquery
 const addCarrito = e => {
+    //console.log(e.target)
     if (e.target.classList.contains('btn-dark')) {
-        // console.log(e.target.dataset.id)
+
+        $("#compra-" + e.target.dataset.id).animate({
+                borderRadius: '250px',
+            },
+            "slow",
+            function () {
+
+                $("#compra-" + e.target.dataset.id).fadeOut(1000, function () {
+
+                    $("#compra-" + e.target.dataset.id).fadeIn(1000)
+                });
+            });
+
+        //console.log(e.target.dataset.id)
         // console.log(e.target.parentElement)
+
         setCarrito(e.target.parentElement)
     }
+
+    $("*[data-id=" + e.target.dataset.id + "]").delay(500).fadeOut(1000).fadeIn(1000);
+
     e.stopPropagation()
 }
 
@@ -66,6 +97,7 @@ const setCarrito = item => {
         cantidad: 1
     }
     // console.log(producto)
+    // operacion para agregar cantidad si repetir html
     if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1
     }
@@ -127,9 +159,18 @@ const pintarFooter = () => {
 
     footer.appendChild(fragment)
 
+    // animate vuelve las imagenes sin border radius
+
     const boton = document.querySelector('#vaciar-carrito')
-    boton.addEventListener('click', () => {
+    boton.addEventListener('click', (e) => {
+        
+        $(".card-img-top").animate({
+            borderRadius: '0px',
+        },
+        "slow"); 
+
         carrito = {}
+        
         pintarCarrito()
     })
 
@@ -160,3 +201,4 @@ const btnAumentarDisminuir = e => {
     }
     e.stopPropagation()
 }
+

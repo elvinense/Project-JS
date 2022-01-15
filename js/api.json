@@ -1,6 +1,7 @@
 [
     {
         "precio": 800,
+        "divisa" : "$",
         "id": 1,
         "title": "Tortas",
         "thumbnailUrl": "https://i.ibb.co/J3vWZpm/Marquise.jpg"
