@@ -35,7 +35,7 @@ items.addEventListener('click', e => {
 
 
 
-// Traer productos
+// Traer productos Fetch en lugar de ajax
 
 const fetchData = async () => {
     const res = await fetch('js/api.json');
