@@ -21,7 +21,7 @@ let carrito = {}
 
 $(document).ready(function () {
     fetchData()
-    if ($('carrito')) {
+    if (localStorage.getItem('carrito')) {
         carrito = JSON.parse(localStorage.getItem('carrito'))
         pintarCarrito()
     }
